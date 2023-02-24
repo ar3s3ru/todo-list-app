@@ -1,5 +1,4 @@
 version: v1
-name: bitbucket.org/chronomics/todolist
 deps:
   - buf.build/googleapis/googleapis
 breaking:
