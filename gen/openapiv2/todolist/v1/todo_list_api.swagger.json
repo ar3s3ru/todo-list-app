@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "todolist/v1/todo_list_api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TodoListService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/todoList/{todoListId}/items/{todoItemId}": {
+      "delete": {
+        "operationId": "TodoListService_DeleteTodoItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTodoItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "todoListId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TodoListService"
+        ]
+      }
+    },
+    "/v1/todoList/{todoListId}/items/{todoItemId}/toggle": {
+      "post": {
+        "operationId": "TodoListService_ToggleTodoItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ToggleTodoItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "todoListId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TodoListService"
+        ]
+      }
+    },
+    "/v1/todoLists": {
+      "post": {
+        "operationId": "TodoListService_CreateTodoList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTodoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateTodoListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TodoListService"
+        ]
+      }
+    },
+    "/v1/todoLists/{todoListId}": {
+      "get": {
+        "operationId": "TodoListService_GetTodoList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTodoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "todoListId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TodoListService"
+        ]
+      }
+    },
+    "/v1/todoLists/{todoListId}/items": {
+      "post": {
+        "operationId": "TodoListService_AddTodoItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AddTodoItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "todoListId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoItem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1TodoItem"
+            }
+          }
+        ],
+        "tags": [
+          "TodoListService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AddTodoItemResponse": {
+      "type": "object",
+      "properties": {
+        "todoItemId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateTodoListRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateTodoListResponse": {
+      "type": "object",
+      "properties": {
+        "todoListId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteTodoItemResponse": {
+      "type": "object"
+    },
+    "v1GetTodoListResponse": {
+      "type": "object",
+      "properties": {
+        "todoList": {
+          "$ref": "#/definitions/v1TodoList"
+        }
+      }
+    },
+    "v1TodoItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1TodoList": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1TodoItem"
+          }
+        }
+      }
+    },
+    "v1ToggleTodoItemResponse": {
+      "type": "object"
+    }
+  }
+}

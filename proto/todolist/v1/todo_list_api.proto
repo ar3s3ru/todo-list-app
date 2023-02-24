@@ -9,7 +9,7 @@ service TodoListService {
   rpc CreateTodoList(CreateTodoListRequest) returns (CreateTodoListResponse) {
     option (google.api.http) = {
       post: "/v1/todoLists"
-      body: "list"
+      body: "*"
     };
   }
 
@@ -20,7 +20,7 @@ service TodoListService {
   rpc AddTodoItem(AddTodoItemRequest) returns (AddTodoItemResponse) {
     option (google.api.http) = {
       post: "/v1/todoLists/{todo_list_id}/items"
-      body: "item"
+      body: "todo_item"
     };
   }
 
