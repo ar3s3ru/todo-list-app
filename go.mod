@@ -1,4 +1,4 @@
-module bitbucket.org/chronomics/todo-list-app
+module github.com/ar3s3ru/todo-list-app
 
 go 1.18
 

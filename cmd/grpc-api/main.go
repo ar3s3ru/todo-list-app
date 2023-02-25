@@ -15,13 +15,13 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	"bitbucket.org/chronomics/todo-list-app/gen/todolist/v1/todolistv1connect"
-	"bitbucket.org/chronomics/todo-list-app/internal/command"
-	"bitbucket.org/chronomics/todo-list-app/internal/domain/todolist"
-	"bitbucket.org/chronomics/todo-list-app/internal/infrastructure/grpc"
-	"bitbucket.org/chronomics/todo-list-app/internal/query"
-	"bitbucket.org/chronomics/todo-list-app/lib/ddd/redisddd"
-	"bitbucket.org/chronomics/todo-list-app/lib/must"
+	"github.com/ar3s3ru/todo-list-app/gen/todolist/v1/todolistv1connect"
+	"github.com/ar3s3ru/todo-list-app/internal/command"
+	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
+	"github.com/ar3s3ru/todo-list-app/internal/infrastructure/grpc"
+	"github.com/ar3s3ru/todo-list-app/internal/query"
+	"github.com/ar3s3ru/todo-list-app/lib/ddd/redisddd"
+	"github.com/ar3s3ru/todo-list-app/lib/must"
 )
 
 func run() error {

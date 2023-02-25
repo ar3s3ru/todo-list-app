@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"bitbucket.org/chronomics/todo-list-app/lib/must"
+	"github.com/ar3s3ru/todo-list-app/lib/must"
 )
 
 func run() error {

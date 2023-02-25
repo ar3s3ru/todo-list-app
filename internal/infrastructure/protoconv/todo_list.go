@@ -3,8 +3,8 @@ package protoconv
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	todolistv1 "bitbucket.org/chronomics/todo-list-app/gen/todolist/v1"
-	"bitbucket.org/chronomics/todo-list-app/internal/domain/todolist"
+	todolistv1 "github.com/ar3s3ru/todo-list-app/gen/todolist/v1"
+	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
 )
 
 func FromTodoList(todoList *todolist.TodoList) *todolistv1.TodoList {

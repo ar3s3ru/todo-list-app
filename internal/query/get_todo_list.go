@@ -6,10 +6,10 @@ import (
 
 	"github.com/google/uuid"
 
-	todolistv1 "bitbucket.org/chronomics/todo-list-app/gen/todolist/v1"
-	"bitbucket.org/chronomics/todo-list-app/internal/domain/todolist"
-	"bitbucket.org/chronomics/todo-list-app/internal/infrastructure/protoconv"
-	"bitbucket.org/chronomics/todo-list-app/lib/ddd"
+	todolistv1 "github.com/ar3s3ru/todo-list-app/gen/todolist/v1"
+	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
+	"github.com/ar3s3ru/todo-list-app/internal/infrastructure/protoconv"
+	"github.com/ar3s3ru/todo-list-app/lib/ddd"
 )
 
 type GetTodoList struct {

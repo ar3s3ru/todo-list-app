@@ -3,7 +3,7 @@ package todolist
 import (
 	"github.com/google/uuid"
 
-	"bitbucket.org/chronomics/todo-list-app/lib/ddd"
+	"github.com/ar3s3ru/todo-list-app/lib/ddd"
 )
 
 type (

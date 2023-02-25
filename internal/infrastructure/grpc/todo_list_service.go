@@ -8,12 +8,12 @@ import (
 	connectgo "github.com/bufbuild/connect-go"
 	"github.com/google/uuid"
 
-	v1 "bitbucket.org/chronomics/todo-list-app/gen/todolist/v1"
-	"bitbucket.org/chronomics/todo-list-app/gen/todolist/v1/todolistv1connect"
-	"bitbucket.org/chronomics/todo-list-app/internal/command"
-	"bitbucket.org/chronomics/todo-list-app/internal/domain/todolist"
-	"bitbucket.org/chronomics/todo-list-app/internal/query"
-	"bitbucket.org/chronomics/todo-list-app/lib/ddd"
+	v1 "github.com/ar3s3ru/todo-list-app/gen/todolist/v1"
+	"github.com/ar3s3ru/todo-list-app/gen/todolist/v1/todolistv1connect"
+	"github.com/ar3s3ru/todo-list-app/internal/command"
+	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
+	"github.com/ar3s3ru/todo-list-app/internal/query"
+	"github.com/ar3s3ru/todo-list-app/lib/ddd"
 )
 
 var _ todolistv1connect.TodoListServiceHandler = &TodoListService{}

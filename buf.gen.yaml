@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: bitbucket.org/chronomics/todo-list-app/gen
+    default: github.com/ar3s3ru/todo-list-app/gen
     except:
       - buf.build/googleapis/googleapis
 plugins:

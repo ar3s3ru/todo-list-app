@@ -5,9 +5,9 @@
 package todolistv1connect
 
 import (
-	v1 "bitbucket.org/chronomics/todo-list-app/gen/todolist/v1"
 	context "context"
 	errors "errors"
+	v1 "github.com/ar3s3ru/todo-list-app/gen/todolist/v1"
 	connect_go "github.com/bufbuild/connect-go"
 	http "net/http"
 	strings "strings"

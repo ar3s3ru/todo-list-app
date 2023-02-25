@@ -9,7 +9,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"bitbucket.org/chronomics/todo-list-app/lib/ddd"
+	"github.com/ar3s3ru/todo-list-app/lib/ddd"
 )
 
 type id interface {
