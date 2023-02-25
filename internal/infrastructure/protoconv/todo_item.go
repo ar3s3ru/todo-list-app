@@ -9,8 +9,10 @@ import (
 
 func FromTodoItem(todoItem todolist.TodoItem) *todolistv1.TodoItem {
 	pb := &todolistv1.TodoItem{
-		Description: todoItem.Description,
-		Completed:   todoItem.Completed,
+		Description:  todoItem.Description,
+		Completed:    todoItem.Completed,
+		DueDate:      nil,
+		CreationTime: nil,
 	}
 
 	if t := todoItem.CreationTime; !t.IsZero() {

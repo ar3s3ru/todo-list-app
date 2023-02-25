@@ -13,8 +13,10 @@ func FromTodoList(todoList *todolist.TodoList) *todolistv1.TodoList {
 	}
 
 	pb := &todolistv1.TodoList{
-		Title: todoList.Title,
-		Owner: todoList.Owner,
+		Title:        todoList.Title,
+		Owner:        todoList.Owner,
+		Items:        nil,
+		CreationTime: nil,
 	}
 
 	if t := todoList.CreationTime; !t.IsZero() {

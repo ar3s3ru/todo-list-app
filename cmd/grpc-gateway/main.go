@@ -14,6 +14,7 @@ func run() error {
 		return fmt.Errorf("grpc-gateway: failed to create logger, %v", err)
 	}
 
+	//nolint:errcheck // No need for this error to come up if it happens.
 	defer logger.Sync()
 
 	return nil

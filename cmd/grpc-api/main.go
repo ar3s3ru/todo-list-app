@@ -35,6 +35,7 @@ func run() error {
 		return fmt.Errorf("grpc-api: failed to create logger, %v", err)
 	}
 
+	//nolint:errcheck // No need for this error to come up if it happens.
 	defer logger.Sync()
 
 	redisClient := redis.NewClient(&redis.Options{
@@ -86,11 +87,14 @@ func run() error {
 	)
 
 	// TODO: implement graceful shutdown
-	err = http.ListenAndServe(
-		config.Server.Address,
-		h2c.NewHandler(mux, &http2.Server{}),
-	)
+	srv := &http.Server{
+		Addr:         config.Server.Address,
+		Handler:      h2c.NewHandler(mux, &http2.Server{}),
+		ReadTimeout:  config.Server.ReadTimeout,
+		WriteTimeout: config.Server.WriteTimeout,
+	}
 
+	err = srv.ListenAndServe()
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
 		return fmt.Errorf("grpc-api: grpc server exited with error, %v", err)
 	}

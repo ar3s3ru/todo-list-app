@@ -16,6 +16,7 @@ type GetTodoList struct {
 	TodoListID uuid.UUID
 }
 
+//nolint:exhaustruct // This is just a guard to ensure the interface is implemented.
 var _ ddd.QueryHandler[GetTodoList, *todolistv1.TodoList] = GetTodoListHandler{}
 
 type GetTodoListHandler struct {

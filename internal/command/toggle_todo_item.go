@@ -15,6 +15,7 @@ type ToggleTodoItem struct {
 	TodoItemID uuid.UUID
 }
 
+//nolint:exhaustruct // This is just a guard to ensure the interface is implemented.
 var _ ddd.CommandHandler[CreateTodoList] = CreateTodoListHandler{}
 
 type ToggleTodoItemHandler struct {

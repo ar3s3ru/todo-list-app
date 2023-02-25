@@ -6,9 +6,7 @@ import (
 	"time"
 )
 
-var (
-	ErrEmptyItemDescription = errors.New("todolist.TodoItem: description is empty")
-)
+var ErrEmptyItemDescription = errors.New("todolist.TodoItem: description is empty")
 
 type TodoItem struct {
 	Description  string

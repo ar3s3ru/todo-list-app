@@ -1,0 +1,118 @@
+---
+# See https://github.com/golangci/golangci-lint/blob/master/.golangci.example.yml
+run:
+  go: "1.18"
+  tests: true
+  deadline: 5m
+  skip-dirs:
+    - gen/
+    - proto/
+
+linters-settings:
+  #  dupl:
+  #    threshold: 100
+  exhaustruct:
+    exclude:
+      - 'github\.com/redis/go-redis/v9\.Options'
+      - 'http\.Server'
+      - 'http2\.Server'
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+  gci:
+    sections: [prefix(github.com/ar3s3ru/todo-list-app)]
+  gocyclo:
+    min-complexity: 20
+  goimports:
+    sections: prefix(github.com/ar3s3ru/todo-list-app)
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - dupImport # https://github.com/go-critic/go-critic/issues/845
+  misspell:
+    locale: US
+  lll:
+    line-length: 160
+  tagliatelle:
+    case:
+      rules:
+        json: snake
+  unused:
+    check-exported: false
+  unparam:
+    check-exported: true
+  gomodguard:
+    blocked:
+      modules:
+        - github.com/golang/protobuf:
+            recommendations:
+              - google.golang.org/protobuf
+  varnamelen:
+    ignore-names:
+      - err
+      - tc # For test cases, like `for _, tc := range testcases`
+      - id
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dogsled
+    - errcheck
+    - exhaustive
+    - exhaustruct
+    - exportloopref
+    - funlen
+      # - gci
+    - gochecknoinits
+    - gochecknoglobals
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+      # - godox
+    - gofumpt
+    - goimports
+    - gomodguard
+    - gomnd
+    - goprintffuncname
+    - exportloopref
+    - gosec
+    - gosimple
+    - govet
+    - ifshort
+    - ineffassign
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - nolintlint
+    - prealloc
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - stylecheck
+    - tagliatelle
+    - testpackage
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - wastedassign
+    - whitespace
+    - wsl
+
+issues:
+  exclude-rules:
+    - path: main\.go
+      linters:
+        - funlen

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	connectgo "github.com/bufbuild/connect-go"
 	"github.com/google/uuid"
@@ -16,6 +17,7 @@ import (
 	"github.com/ar3s3ru/todo-list-app/lib/ddd"
 )
 
+//nolint:exhaustruct // This is just a guard to ensure the interface is implemented.
 var _ todolistv1connect.TodoListServiceHandler = &TodoListService{}
 
 type TodoListService struct {
@@ -28,7 +30,7 @@ type TodoListService struct {
 	command.ToggleTodoItemHandler
 }
 
-// CreateTodoList implements todolistv1connect.TodoListServiceHandler
+// CreateTodoList implements todolistv1connect.TodoListServiceHandler.
 func (srv *TodoListService) CreateTodoList(
 	ctx context.Context,
 	req *connectgo.Request[v1.CreateTodoListRequest],
@@ -39,7 +41,7 @@ func (srv *TodoListService) CreateTodoList(
 		Owner: req.Msg.Owner,
 	}
 
-	switch err := srv.CreateTodoListHandler.Handle(ctx, cmd); true {
+	switch err := srv.CreateTodoListHandler.Handle(ctx, cmd); {
 	case err == nil:
 		return connectgo.NewResponse(&v1.CreateTodoListResponse{
 			TodoListId: cmd.ID.String(),
@@ -51,7 +53,7 @@ func (srv *TodoListService) CreateTodoList(
 	}
 }
 
-// AddTodoItem implements todolistv1connect.TodoListServiceHandler
+// AddTodoItem implements todolistv1connect.TodoListServiceHandler.
 func (srv *TodoListService) AddTodoItem(
 	ctx context.Context,
 	req *connectgo.Request[v1.AddTodoItemRequest],
@@ -65,13 +67,14 @@ func (srv *TodoListService) AddTodoItem(
 		TodoListID:  todoListID,
 		TodoItemID:  srv.GenerateIDFunc(),
 		Description: req.Msg.Description,
+		DueDate:     time.Time{},
 	}
 
 	if req.Msg.DueDate != nil {
 		cmd.DueDate = req.Msg.DueDate.AsTime()
 	}
 
-	switch err := srv.AddItemToTodoListHandler.Handle(ctx, cmd); true {
+	switch err := srv.AddItemToTodoListHandler.Handle(ctx, cmd); {
 	case err == nil:
 		return connectgo.NewResponse(&v1.AddTodoItemResponse{
 			TodoItemId: cmd.TodoItemID.String(),
@@ -83,7 +86,7 @@ func (srv *TodoListService) AddTodoItem(
 	}
 }
 
-// ToggleTodoItem implements todolistv1connect.TodoListServiceHandler
+// ToggleTodoItem implements todolistv1connect.TodoListServiceHandler.
 func (srv *TodoListService) ToggleTodoItem(
 	ctx context.Context,
 	req *connectgo.Request[v1.ToggleTodoItemRequest],
@@ -103,7 +106,7 @@ func (srv *TodoListService) ToggleTodoItem(
 		TodoItemID: todoItemID,
 	}
 
-	switch err := srv.ToggleTodoItemHandler.Handle(ctx, cmd); true {
+	switch err := srv.ToggleTodoItemHandler.Handle(ctx, cmd); {
 	case err == nil:
 		return connectgo.NewResponse(&v1.ToggleTodoItemResponse{}), nil
 	default:
@@ -111,7 +114,7 @@ func (srv *TodoListService) ToggleTodoItem(
 	}
 }
 
-// DeleteTodoItem implements todolistv1connect.TodoListServiceHandler
+// DeleteTodoItem implements todolistv1connect.TodoListServiceHandler.
 func (*TodoListService) DeleteTodoItem(
 	ctx context.Context,
 	req *connectgo.Request[v1.DeleteTodoItemRequest],
@@ -119,7 +122,7 @@ func (*TodoListService) DeleteTodoItem(
 	return nil, connectgo.NewError(connectgo.CodeUnimplemented, errors.New("not implemented"))
 }
 
-// GetTodoList implements todolistv1connect.TodoListServiceHandler
+// GetTodoList implements todolistv1connect.TodoListServiceHandler.
 func (srv *TodoListService) GetTodoList(
 	ctx context.Context,
 	req *connectgo.Request[v1.GetTodoListRequest],
@@ -133,7 +136,7 @@ func (srv *TodoListService) GetTodoList(
 		TodoListID: todoListID,
 	})
 
-	switch true {
+	switch {
 	case err == nil:
 		return connectgo.NewResponse(&v1.GetTodoListResponse{
 			TodoList: todoList,

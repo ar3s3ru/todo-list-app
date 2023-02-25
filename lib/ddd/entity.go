@@ -5,9 +5,7 @@ import (
 	"errors"
 )
 
-var (
-	ErrEntityNotFound = errors.New("ddd: entity not found")
-)
+var ErrEntityNotFound = errors.New("ddd: entity not found")
 
 type Entity[ID comparable] interface {
 	ID() ID

@@ -19,6 +19,7 @@ var (
 	ErrItemNotFound      = errors.New("todolist: item not found")
 )
 
+//nolint:exhaustruct // This is just a guard to ensure the interface is implemented.
 var _ ddd.Entity[uuid.UUID] = &TodoList{}
 
 type TodoList struct {
@@ -54,6 +55,7 @@ func Create(id uuid.UUID, title, owner string, now time.Time) (*TodoList, error)
 		TodoListID:   id,
 		Title:        title,
 		Owner:        owner,
+		Items:        nil, // To avoid unnecessary allocations.
 		CreationTime: now,
 	}
 

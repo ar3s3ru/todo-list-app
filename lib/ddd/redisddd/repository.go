@@ -77,6 +77,7 @@ func (r Repository[ID, T]) Get(ctx context.Context, id ID) (T, error) {
 	if errors.Is(err, redis.Nil) {
 		err = ddd.ErrEntityNotFound
 	}
+
 	if err != nil {
 		return zero, fmt.Errorf("redisddd.Repository: failed to get entity, %w", err)
 	}

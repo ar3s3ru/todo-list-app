@@ -18,6 +18,7 @@ type AddItemToTodoList struct {
 	DueDate     time.Time
 }
 
+//nolint:exhaustruct // This is just a guard to ensure the interface is implemented.
 var _ ddd.CommandHandler[CreateTodoList] = CreateTodoListHandler{}
 
 type AddItemToTodoListHandler struct {

@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/kelseyhightower/envconfig"
 )
 
 type Config struct {
 	Server struct {
-		Address string `default:":8080" required:"true"`
+		Address      string        `default:":8080" required:"true"`
+		ReadTimeout  time.Duration `default:"10s" required:"true"`
+		WriteTimeout time.Duration `default:"10s" required:"true"`
 	}
 
 	Redis struct {
