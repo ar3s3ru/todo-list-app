@@ -175,11 +175,20 @@
             "type": "string"
           },
           {
-            "name": "todoItem",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1TodoItem"
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "dueDate": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
             }
           }
         ],
@@ -261,12 +270,16 @@
         "description": {
           "type": "string"
         },
+        "completed": {
+          "type": "boolean"
+        },
         "dueDate": {
           "type": "string",
           "format": "date-time"
         },
-        "completed": {
-          "type": "boolean"
+        "creationTime": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -284,6 +297,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/v1TodoItem"
           }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

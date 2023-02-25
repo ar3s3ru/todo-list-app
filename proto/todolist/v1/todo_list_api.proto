@@ -3,6 +3,7 @@ syntax = "proto3";
 package todolist.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "todolist/v1/todo_list.proto";
 
 service TodoListService {
@@ -20,7 +21,7 @@ service TodoListService {
   rpc AddTodoItem(AddTodoItemRequest) returns (AddTodoItemResponse) {
     option (google.api.http) = {
       post: "/v1/todoLists/{todo_list_id}/items"
-      body: "todo_item"
+      body: "*"
     };
   }
 
@@ -52,7 +53,8 @@ message GetTodoListResponse {
 
 message AddTodoItemRequest {
   string todo_list_id = 1;
-  TodoItem todo_item = 2;
+  string description = 2;
+  google.protobuf.Timestamp due_date = 3;
 }
 
 message AddTodoItemResponse {
