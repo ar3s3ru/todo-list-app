@@ -73,6 +73,9 @@ func run() error {
 		ToggleTodoItemHandler: command.ToggleTodoItemHandler{
 			Repository: todoListRepository,
 		},
+		DeleteTodoItemHandler: command.DeleteTodoItemHandler{
+			Repository: todoListRepository,
+		},
 	}
 
 	mux := http.NewServeMux()

@@ -28,6 +28,7 @@ type TodoListService struct {
 	command.CreateTodoListHandler
 	command.AddItemToTodoListHandler
 	command.ToggleTodoItemHandler
+	command.DeleteTodoItemHandler
 }
 
 // CreateTodoList implements todolistv1connect.TodoListServiceHandler.
@@ -115,11 +116,33 @@ func (srv *TodoListService) ToggleTodoItem(
 }
 
 // DeleteTodoItem implements todolistv1connect.TodoListServiceHandler.
-func (*TodoListService) DeleteTodoItem(
+func (srv *TodoListService) DeleteTodoItem(
 	ctx context.Context,
 	req *connectgo.Request[v1.DeleteTodoItemRequest],
 ) (*connectgo.Response[v1.DeleteTodoItemResponse], error) {
-	return nil, connectgo.NewError(connectgo.CodeUnimplemented, errors.New("not implemented"))
+	todoListID, err := uuid.Parse(req.Msg.TodoListId)
+	if err != nil {
+		return nil, connectgo.NewError(connectgo.CodeInvalidArgument, fmt.Errorf("grpc.TodoListService: failed to parse todoListId, %v", err))
+	}
+
+	todoItemID, err := uuid.Parse(req.Msg.TodoItemId)
+	if err != nil {
+		return nil, connectgo.NewError(connectgo.CodeInvalidArgument, fmt.Errorf("grpc.TodoListService: failed to parse todoItemId, %v", err))
+	}
+
+	cmd := command.DeleteTodoItem{
+		TodoListID: todoListID,
+		TodoItemID: todoItemID,
+	}
+
+	switch err := srv.DeleteTodoItemHandler.Handle(ctx, cmd); {
+	case err == nil:
+		return connectgo.NewResponse(&v1.DeleteTodoItemResponse{}), nil
+	case errors.Is(err, todolist.ErrItemNotFound):
+		return nil, connectgo.NewError(connectgo.CodeNotFound, err)
+	default:
+		return nil, connectgo.NewError(connectgo.CodeInternal, err)
+	}
 }
 
 // GetTodoList implements todolistv1connect.TodoListServiceHandler.
