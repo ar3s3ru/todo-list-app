@@ -1,0 +1,18 @@
+{
+  "editor.formatOnSave": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+  },
+  "[proto]": {
+    "editor.defaultFormatter": "bufbuild.vscode-buf"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "bufbuild.vscode-buf"
+  },
+  "go.lintTool": "golangci-lint",
+  "gopls": {
+    "ui.semanticTokens": true,
+    "formatting.gofumpt": true
+  },
+  "editor.formatOnPaste": true,
+}
