@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/bufbuild/connect-go"
 	grpchealth "github.com/bufbuild/connect-grpchealth-go"
 	grpcreflect "github.com/bufbuild/connect-grpcreflect-go"
 	"github.com/google/uuid"
@@ -20,6 +21,7 @@ import (
 	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
 	"github.com/ar3s3ru/todo-list-app/internal/infrastructure/grpc"
 	"github.com/ar3s3ru/todo-list-app/internal/query"
+	"github.com/ar3s3ru/todo-list-app/lib/connectext"
 	"github.com/ar3s3ru/todo-list-app/lib/must"
 	"github.com/ar3s3ru/todo-list-app/lib/redisddd"
 )
@@ -30,7 +32,7 @@ func run() error {
 		return fmt.Errorf("grpc-api: failed to parse config, %v", err)
 	}
 
-	logger, err := zap.NewDevelopment()
+	logger, err := zap.NewProduction()
 	if err != nil {
 		return fmt.Errorf("grpc-api: failed to create logger, %v", err)
 	}
@@ -80,7 +82,11 @@ func run() error {
 
 	mux := http.NewServeMux()
 
-	mux.Handle(todolistv1connect.NewTodoListServiceHandler(todoListService))
+	mux.Handle(todolistv1connect.NewTodoListServiceHandler(
+		todoListService,
+		connect.WithInterceptors(connectext.LoggingInterceptor(logger))),
+	)
+
 	mux.Handle(grpchealth.NewHandler(grpchealth.NewStaticChecker(todolistv1connect.TodoListServiceName)))
 	mux.Handle(grpcreflect.NewHandlerV1(grpcreflect.NewStaticReflector(todolistv1connect.TodoListServiceName)))
 	mux.Handle(grpcreflect.NewHandlerV1Alpha(grpcreflect.NewStaticReflector(todolistv1connect.TodoListServiceName)))
