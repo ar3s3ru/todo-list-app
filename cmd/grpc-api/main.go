@@ -20,8 +20,8 @@ import (
 	"github.com/ar3s3ru/todo-list-app/internal/domain/todolist"
 	"github.com/ar3s3ru/todo-list-app/internal/infrastructure/grpc"
 	"github.com/ar3s3ru/todo-list-app/internal/query"
-	"github.com/ar3s3ru/todo-list-app/lib/ddd/redisddd"
 	"github.com/ar3s3ru/todo-list-app/lib/must"
+	"github.com/ar3s3ru/todo-list-app/lib/redisddd"
 )
 
 func run() error {
